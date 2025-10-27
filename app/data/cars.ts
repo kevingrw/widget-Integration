@@ -1,4 +1,6 @@
 // Shared cars dataset (extracted from the page payload)
+const CDN_BASE_URL = process.env.NEXT_PUBLIC_CDN_BASE_URL || "http://vehicle-photos-published.vauto.com";
+
 export const cars: any[] = [
     {
         id: "0280a388-6aa6-4ea1-b50d-d93ce1ddd06e",
@@ -33,7 +35,7 @@ export const cars: any[] = [
         city_mpg: 25,
         highway_mpg: 36,
         photos: [
-            "http://vehicle-photos-published.vauto.com/7d/76/bc/35-4b5e-4951-b551-60fb7c377e26/image-1.jpg"
+            `${CDN_BASE_URL}/7d/76/bc/35-4b5e-4951-b551-60fb7c377e26/image-1.jpg`
         ],
         engine: "I4",
         fuel: "Gasoline",
@@ -82,7 +84,7 @@ export const cars: any[] = [
         city_mpg: 24,
         highway_mpg: 27,
         photos: [
-            "http://vehicle-photos-published.vauto.com/27/89/53/67-9410-4c48-9648-00d1a819d8db/image-1.jpg"
+            `${CDN_BASE_URL}/27/89/53/67-9410-4c48-9648-00d1a819d8db/image-1.jpg`
         ],
         engine: "I4",
         fuel: "Gasoline",
@@ -99,7 +101,7 @@ export const cars: any[] = [
         model: "K5",
         msrp: "$29,585.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/da/90/7d/42-5d3e-4366-8fba-fb9115025d63/image-1.jpg"
+            `${CDN_BASE_URL}/da/90/7d/42-5d3e-4366-8fba-fb9115025d63/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -111,7 +113,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$30,335.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/d5/e7/c2/47-5afe-4c0d-a893-c16382419ffa/image-1.jpg"
+            `${CDN_BASE_URL}/d5/e7/c2/47-5afe-4c0d-a893-c16382419ffa/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -123,7 +125,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$31,065.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/f3/d3/db/cd-6a7d-4d16-b467-ebdcb8ad7b44/image-1.jpg"
+            `${CDN_BASE_URL}/f3/d3/db/cd-6a7d-4d16-b467-ebdcb8ad7b44/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -135,7 +137,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$30,490.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/31/3d/12/1c-78b3-4474-a9fe-21e996749659/image-1.jpg"
+            `${CDN_BASE_URL}/31/3d/12/1c-78b3-4474-a9fe-21e996749659/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -148,7 +150,7 @@ export const cars: any[] = [
         price: "$29,997.00",
         msrp: "$48,090.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/58/81/56/f4-6dba-4be5-b32b-1e7ad11e7c2d/image-1.jpg"
+            `${CDN_BASE_URL}/58/81/56/f4-6dba-4be5-b32b-1e7ad11e7c2d/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -160,7 +162,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$35,130.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/e3/c1/d6/41-f2c6-42d2-8866-8d350b337714/image-1.jpg"
+            `${CDN_BASE_URL}/e3/c1/d6/41-f2c6-42d2-8866-8d350b337714/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -173,7 +175,7 @@ export const cars: any[] = [
         price: "$34,997.00",
         msrp: "$40,315.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/b5/40/06/1a-2c7b-4361-8462-34a2872962f9/image-1.jpg"
+            `${CDN_BASE_URL}/b5/40/06/1a-2c7b-4361-8462-34a2872962f9/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -185,7 +187,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$34,565.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/de/c9/21/a6-07b8-4b7b-bb6c-73ea41d9341f/image-1.jpg"
+            `${CDN_BASE_URL}/de/c9/21/a6-07b8-4b7b-bb6c-73ea41d9341f/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -197,7 +199,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$30,265.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/bf/c5/b1/36-733b-4c91-9834-36fc8bd34f08/image-1.jpg"
+            `${CDN_BASE_URL}/bf/c5/b1/36-733b-4c91-9834-36fc8bd34f08/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -209,7 +211,7 @@ export const cars: any[] = [
         model: "Seltos",
         msrp: "$28,870.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/97/d7/82/98-d7ea-4d42-b3a6-2c881983604d/image-1.jpg"
+            `${CDN_BASE_URL}/97/d7/82/98-d7ea-4d42-b3a6-2c881983604d/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -221,7 +223,7 @@ export const cars: any[] = [
         model: "K5",
         msrp: "$31,985.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/74/e5/84/65-1691-4b13-99da-5845b22c4d6d/image-1.jpg"
+            `${CDN_BASE_URL}/74/e5/84/65-1691-4b13-99da-5845b22c4d6d/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -233,7 +235,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$36,290.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/64/6c/6d/bf-acee-415b-a0c4-817d66aa4a97/image-1.jpg"
+            `${CDN_BASE_URL}/64/6c/6d/bf-acee-415b-a0c4-817d66aa4a97/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -245,7 +247,7 @@ export const cars: any[] = [
         model: "Sportage",
         msrp: "$28,690.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/08/71/9a/dc-0414-4612-b568-e3ed1bac1f3d/image-1.jpg"
+            `${CDN_BASE_URL}/08/71/9a/dc-0414-4612-b568-e3ed1bac1f3d/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     },
@@ -257,7 +259,7 @@ export const cars: any[] = [
         model: "Sorento",
         msrp: "$33,630.00",
         photos: [
-            "http://vehicle-photos-published.vauto.com/71/3d/9f/73-3089-45ec-a142-1e46efef27d7/image-1.jpg"
+            `${CDN_BASE_URL}/71/3d/9f/73-3089-45ec-a142-1e46efef27d7/image-1.jpg`
         ],
         store: { name: "Kia of Bedford" }
     }

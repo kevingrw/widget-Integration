@@ -15,7 +15,7 @@ export default function ChatWidget({
     apiKey = "GnsBqGI0OjOCwPL4Ps9F",
     primaryColor = "#083062",
     secondaryColor = "#B21945",
-    widgetBaseUrl = "http://localhost:3000",
+    widgetBaseUrl = process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000",
 }: Props) {
     useEffect(() => {
         // Check if script already exists
@@ -28,9 +28,9 @@ export default function ChatWidget({
         script.src = `${widgetBaseUrl}/drive-point-chat-widget.js`;
         script.async = true;
         script.setAttribute("data-drive-point-chat", "");
-        script.setAttribute("data-api-url", "https://api.drivepointautogroup.com/api/v1");
+        script.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
         script.setAttribute("data-api-key", apiKey);
-        script.setAttribute("data-websocket-url", "wss://api.drivepointautogroup.com");
+        script.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
         if (dealerId) script.setAttribute("data-dealer-id", dealerId);
         script.setAttribute("data-primary-color", primaryColor);
         script.setAttribute("data-secondary-color", secondaryColor);

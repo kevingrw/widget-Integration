@@ -21,7 +21,7 @@ export default function AskAIButton({
     primaryColor = "#083062",
     secondaryColor = "#B21945",
     preload = true,
-    widgetBaseUrl = "http://localhost:3000",
+    widgetBaseUrl = process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000",
 }: Props) {
     const [loading, setLoading] = useState(false);
 
@@ -100,8 +100,8 @@ export default function AskAIButton({
         if (existing) {
             // Update attributes in-place so widget has the correct context.
             if (apiKey) existing.setAttribute("data-api-key", apiKey);
-            existing.setAttribute("data-api-url", "https://api.drivepointautogroup.com/api/v1");
-            existing.setAttribute("data-websocket-url", "wss://api.drivepointautogroup.com");
+            existing.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
+            existing.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
             if (dealerId) existing.setAttribute("data-dealer-id", dealerId);
             else existing.removeAttribute("data-dealer-id");
             if (vehicleId) existing.setAttribute("data-vehicle-id", vehicleId);
@@ -122,9 +122,9 @@ export default function AskAIButton({
         s.src = `${widgetBaseUrl}/drive-point-chat-widget.js`;
         s.async = true;
         s.setAttribute("data-drive-point-chat", "");
-        s.setAttribute("data-api-url", "https://api.drivepointautogroup.com/api/v1");
+        s.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
         s.setAttribute("data-api-key", apiKey);
-        s.setAttribute("data-websocket-url", "wss://api.drivepointautogroup.com");
+        s.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
         if (dealerId) s.setAttribute("data-dealer-id", dealerId);
         if (vehicleId) s.setAttribute("data-vehicle-id", vehicleId);
         s.setAttribute("data-primary-color", primaryColor);
