@@ -109,6 +109,7 @@ export default function AskAIButton({
             existing.setAttribute("data-primary-color", primaryColor);
             existing.setAttribute("data-secondary-color", secondaryColor);
             existing.setAttribute("data-placeholder", "Ask me anything...");
+            existing.setAttribute("data-store-mode","single-store", );
 
             if (opts.replace) {
                 existing.remove();
@@ -130,6 +131,7 @@ export default function AskAIButton({
         s.setAttribute("data-primary-color", primaryColor);
         s.setAttribute("data-secondary-color", secondaryColor);
         s.setAttribute("data-placeholder", "Ask me anything...");
+        s.setAttribute("data-store-mode","single-store", );
 
         s.onload = () => {
             // After the script loads, attempt to open the widget (use retries to handle async init)
