@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 
 type Props = {
     dealerId?: string | null;
-    vehicleId?: string; // Optional - for multi-store (Drive Point main site)
-    vin?: string; // Optional - for single-store VDP, used when stores don't have access to centralized vehicle UUIDs
-    apiKey?: string;
+    vin?: string; // Optional - for VDP pages with specific vehicle
     primaryColor?: string;
     secondaryColor?: string;
     // If preload is true the widget script is injected when the component mounts
@@ -17,9 +15,7 @@ type Props = {
 
 export default function AskAIButton({
     dealerId,
-    vehicleId,
     vin,
-    apiKey = "GnsBqGI0OjOCwPL4Ps9F",
     primaryColor = "#083062",
     secondaryColor = "#B21945",
     preload = true,
@@ -33,8 +29,8 @@ export default function AskAIButton({
             const w = window as any;
             // Preferred explicit widget API
             if (w.DrivePointChatWidget && typeof w.DrivePointChatWidget.open === "function") {
-                // Pass VIN for single-store mode, vehicleId for multi-store mode
-                w.DrivePointChatWidget.open(vin || vehicleId || "");
+                // Pass VIN if available
+                w.DrivePointChatWidget.open(vin || "");
                 return true;
             }
             if (w.drivePointChat && typeof w.drivePointChat.open === "function") {
@@ -102,21 +98,13 @@ export default function AskAIButton({
         const existing = document.getElementById("drive-point-chat-widget-script") as HTMLScriptElement | null;
         if (existing) {
             // Update attributes in-place so widget has the correct context.
-            if (apiKey) existing.setAttribute("data-api-key", apiKey);
-            existing.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
-            existing.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
             if (dealerId) existing.setAttribute("data-dealer-id", dealerId);
             else existing.removeAttribute("data-dealer-id");
-            // For multi-store mode, use vehicle_id
-            if (vehicleId) existing.setAttribute("data-vehicle-id", vehicleId);
-            else existing.removeAttribute("data-vehicle-id");
-            // For single-store mode, use VIN
             if (vin) existing.setAttribute("data-vin", vin);
             else existing.removeAttribute("data-vin");
             existing.setAttribute("data-primary-color", primaryColor);
             existing.setAttribute("data-secondary-color", secondaryColor);
             existing.setAttribute("data-placeholder", "Ask me anything...");
-            existing.setAttribute("data-store-mode","single-store", );
 
             if (opts.replace) {
                 existing.remove();
@@ -130,18 +118,11 @@ export default function AskAIButton({
         s.src = `${widgetBaseUrl}/drive-point-chat-widget.js`;
         s.async = true;
         s.setAttribute("data-drive-point-chat", "");
-        s.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
-        s.setAttribute("data-api-key", apiKey);
-        s.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
         if (dealerId) s.setAttribute("data-dealer-id", dealerId);
-        // For multi-store mode, use vehicle_id
-        if (vehicleId) s.setAttribute("data-vehicle-id", vehicleId);
-        // For single-store mode, use VIN
         if (vin) s.setAttribute("data-vin", vin);
         s.setAttribute("data-primary-color", primaryColor);
         s.setAttribute("data-secondary-color", secondaryColor);
         s.setAttribute("data-placeholder", "Ask me anything...");
-        s.setAttribute("data-store-mode","single-store", );
 
         s.onload = () => {
             // After the script loads, attempt to open the widget (use retries to handle async init)
@@ -168,7 +149,7 @@ export default function AskAIButton({
             // ignore
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dealerId, vehicleId, vin, preload]);
+    }, [dealerId, vin, preload]);
 
     const handleClick = () => {
         setLoading(true);
@@ -182,8 +163,8 @@ export default function AskAIButton({
             const w = window as any;
             if (w.DrivePointChatWidget && typeof w.DrivePointChatWidget.open === "function") {
                 try {
-                    // Pass VIN for single-store mode, vehicleId for multi-store mode
-                    w.DrivePointChatWidget.open(vin || vehicleId || "");
+                    // Pass VIN if available
+                    w.DrivePointChatWidget.open(vin || "");
                 } catch (e) {
                     // fallback to heuristics
                     openWithRetries();
@@ -206,7 +187,6 @@ export default function AskAIButton({
     return (
         <button
             onClick={handleClick}
-            data-vehicle-id={vehicleId}
             data-vin={vin}
             data-dealer-id={dealerId || undefined}
             className="block w-full text-center bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 rounded"

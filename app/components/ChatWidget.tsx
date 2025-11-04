@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 type Props = {
     dealerId?: string | null;
-    apiKey?: string;
+    vin?: string; // Optional - for VDP pages with specific vehicle
     primaryColor?: string;
     secondaryColor?: string;
     widgetBaseUrl?: string;
@@ -12,7 +12,7 @@ type Props = {
 
 export default function ChatWidget({
     dealerId,
-    apiKey = "GnsBqGI0OjOCwPL4Ps9F",
+    vin,
     primaryColor = "#083062",
     secondaryColor = "#B21945",
     widgetBaseUrl = process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000",
@@ -28,10 +28,8 @@ export default function ChatWidget({
         script.src = `${widgetBaseUrl}/drive-point-chat-widget.js`;
         script.async = true;
         script.setAttribute("data-drive-point-chat", "");
-        script.setAttribute("data-api-url", process.env.NEXT_PUBLIC_API_URL || "https://api.drivepointautogroup.com/api/v1");
-        script.setAttribute("data-api-key", apiKey);
-        script.setAttribute("data-websocket-url", process.env.NEXT_PUBLIC_WEBSOCKET_URL || "wss://api.drivepointautogroup.com");
         if (dealerId) script.setAttribute("data-dealer-id", dealerId);
+        if (vin) script.setAttribute("data-vin", vin);
         script.setAttribute("data-primary-color", primaryColor);
         script.setAttribute("data-secondary-color", secondaryColor);
         script.setAttribute("data-placeholder", "Ask me anything...");
@@ -53,7 +51,7 @@ export default function ChatWidget({
                 scriptToRemove.remove();
             }
         };
-    }, [dealerId, apiKey, primaryColor, secondaryColor, widgetBaseUrl]);
+    }, [dealerId, vin, primaryColor, secondaryColor, widgetBaseUrl]);
 
     return null; // This component doesn't render anything visible
 }

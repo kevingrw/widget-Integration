@@ -78,10 +78,11 @@ export default async function CarPage({ params }: Props) {
                             <div className="mt-3 flex flex-col gap-2">
                                 <a href={car.photos && car.photos[0] ? car.photos[0] : '#'} target="_blank" rel="noreferrer" className="block text-center bg-black text-white px-3 py-2 rounded">View Primary Photo</a>
                                 <button className="block w-full text-center border border-gray-200 px-3 py-2 rounded">Contact dealer</button>
-                                {/* ASK AI widget trigger */}
+                                {/* ASK AI widget trigger - using VIN for single-store mode */}
                                 <AskAIButton
                                     dealerId={car.dealer_id || car.store?.public_key || car.store?.id || car.store?.dealer_id || null}
-                                    vehicleId={car.id}
+                                    vin={car.vin}
+                                    storeMode="single-store"
                                     widgetBaseUrl={process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000"}
                                 />
                             </div>
