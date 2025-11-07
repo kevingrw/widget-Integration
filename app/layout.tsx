@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         {children}
         <ChatWidget
-          dealerId="MP23218"
+          dealerId="MP2227"
           widgetBaseUrl={process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000"}
         />
       </body>

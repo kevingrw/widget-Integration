@@ -11,6 +11,8 @@ type Props = {
     preload?: boolean;
     // Base URL for the widget server (e.g., http://localhost:3000)
     widgetBaseUrl?: string;
+    // Store mode for the widget
+    storeMode?: string;
 };
 
 export default function AskAIButton({
@@ -20,6 +22,7 @@ export default function AskAIButton({
     secondaryColor = "#B21945",
     preload = true,
     widgetBaseUrl = process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000",
+    storeMode,
 }: Props) {
     const [loading, setLoading] = useState(false);
 
@@ -97,11 +100,16 @@ export default function AskAIButton({
     const ensureScript = (opts: { replace?: boolean } = {}) => {
         const existing = document.getElementById("drive-point-chat-widget-script") as HTMLScriptElement | null;
         if (existing) {
+            console.log("Set dealer ID:", dealerId);
             // Update attributes in-place so widget has the correct context.
-            if (dealerId) existing.setAttribute("data-dealer-id", dealerId);
-            else existing.removeAttribute("data-dealer-id");
-            if (vin) existing.setAttribute("data-vin", vin);
-            else existing.removeAttribute("data-vin");
+            // Only update dealerId if explicitly provided (preserve existing value otherwise)
+            if (dealerId) {
+                existing.setAttribute("data-dealer-id", dealerId);
+            }
+            // Don't set VIN data attribute
+            existing.removeAttribute("data-vin");
+            if (storeMode) existing.setAttribute("data-store-mode", storeMode);
+            else existing.removeAttribute("data-store-mode");
             existing.setAttribute("data-primary-color", primaryColor);
             existing.setAttribute("data-secondary-color", secondaryColor);
             existing.setAttribute("data-placeholder", "Ask me anything...");
@@ -119,7 +127,8 @@ export default function AskAIButton({
         s.async = true;
         s.setAttribute("data-drive-point-chat", "");
         if (dealerId) s.setAttribute("data-dealer-id", dealerId);
-        if (vin) s.setAttribute("data-vin", vin);
+        // Don't set VIN data attribute
+        if (storeMode) s.setAttribute("data-store-mode", storeMode);
         s.setAttribute("data-primary-color", primaryColor);
         s.setAttribute("data-secondary-color", secondaryColor);
         s.setAttribute("data-placeholder", "Ask me anything...");
@@ -143,11 +152,8 @@ export default function AskAIButton({
         // Preload the widget script when the component mounts so the widget is initialized
         // and ready to open when the user clicks. We don't force-open here; the click
         // handler triggers openWithRetries.
-        try {
-            ensureScript({ replace: false });
-        } catch (e) {
-            // ignore
-        }
+        // Note: We don't call ensureScript here to avoid setting VIN before user clicks.
+        // The widget script should already be loaded by ChatWidget in the layout.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dealerId, vin, preload]);
 

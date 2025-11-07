@@ -29,7 +29,8 @@ export default function ChatWidget({
         script.async = true;
         script.setAttribute("data-drive-point-chat", "");
         if (dealerId) script.setAttribute("data-dealer-id", dealerId);
-        if (vin) script.setAttribute("data-vin", vin);
+        console.log("Setting dealer ID:", dealerId);
+        // Don't set VIN data attribute
         script.setAttribute("data-primary-color", primaryColor);
         script.setAttribute("data-secondary-color", secondaryColor);
         script.setAttribute("data-placeholder", "Ask me anything...");

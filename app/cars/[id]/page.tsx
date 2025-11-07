@@ -10,6 +10,14 @@ export default async function CarPage({ params }: Props) {
     const car = cars.find((c: any) => c.id === id);
     if (!car) return notFound();
 
+    console.log("Car data:", {
+        id: car.id,
+        dealer_id: car.dealer_id,
+        vin: car.vin,
+        hasStore: !!car.store,
+        storeKeys: car.store ? Object.keys(car.store) : []
+    });
+
     return (
         <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50">
             <main className="max-w-4xl mx-auto px-6 py-12">
@@ -80,7 +88,7 @@ export default async function CarPage({ params }: Props) {
                                 <button className="block w-full text-center border border-gray-200 px-3 py-2 rounded">Contact dealer</button>
                                 {/* ASK AI widget trigger - using VIN for single-store mode */}
                                 <AskAIButton
-                                    dealerId={car.dealer_id || car.store?.public_key || car.store?.id || car.store?.dealer_id || null}
+                                    dealerId={car.dealer_id || car.store?.public_key || car.store?.id || car.store?.dealer_id || "MP2227"}
                                     vin={car.vin}
                                     storeMode="single-store"
                                     widgetBaseUrl={process.env.NEXT_PUBLIC_WIDGET_URL || "http://localhost:3000"}
